@@ -11,7 +11,6 @@ int main(void) {
         ssize_t result = write(STDOUT_FILENO,
                                message + written,
                                length - written);
-
         if (result == -1) {
             if (errno == EINTR) {
                 continue;
@@ -19,13 +18,7 @@ int main(void) {
             perror("write");
             return 1;
         }
-        if (result == 0) {
-            fprintf(stderr, "write returned 0 before all bytes were written\n");
-            return 1;
-        }
-
         written += (size_t)result;
     }
-
     return 0;
 }
